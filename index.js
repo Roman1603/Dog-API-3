@@ -1,7 +1,7 @@
 "use strict";
 //Fetches Dog Image
 function getDogImage(breed) {
-  fetch("https://dog.ceo/api/breed/${breed}/images/random")
+  fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
     .then(response => response.json())
     .then(responseJson => displayResults(responseJson, breed))
     .catch(error => alert("Something went wrong. Try again later."));
@@ -10,7 +10,9 @@ function getDogImage(breed) {
 //Display Images in the DOM
 function displayResults(responseJson, breed) {
   console.log(responseJson.message);
-  if (responseJson.message === "Breed not found") {
+  if (
+    responseJson.message === "Breed not found (master breed does not exist)"
+  ) {
     $(".results").append(`<h2>Breed not found- please try again.</h2>`);
   } else {
     $(".results").append(`<h2>Here is a ${breed}: </h2>
